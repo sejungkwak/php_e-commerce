@@ -24,12 +24,11 @@ All earring images used in this project are sourced from the following:
 | drop2 | https://www.pexels.com/photo/a-diamond-earrings-with-gems-on-a-white-surface-7258925/ |
 | drop3 | https://www.pexels.com/photo/close-up-of-golden-earrings-21235147/ |
 | drop4 | https://www.pexels.com/photo/display-of-elegant-earrings-22757118/ |
-| drop5 | https://www.pexels.com/photo/gold-colored-earrings-on-white-background-3881077/ |
+| drop5 | https://unsplash.com/photos/a-pair-of-earrings-sitting-next-to-a-mirror-tPM3nd4J8xs/ |
 | drop6 | https://www.pexels.com/photo/gold-and-black-earrings-in-close-up-photography-6635999/ |
 | drop7 | https://www.pexels.com/photo/close-up-of-two-earrings-15827688/ |
 | drop8 | https://www.pexels.com/photo/pink-gemstone-earrings-6636001/ |
 | drop9 | https://unsplash.com/photos/a-pair-of-black-and-gold-earrings-with-a-pearl-0twGcvn-i0E/ |
-| drop10 | https://unsplash.com/photos/a-pair-of-earrings-sitting-next-to-a-mirror-tPM3nd4J8xs/ |
 | hoop1 | https://unsplash.com/photos/a-couple-of-rings-sitting-on-top-of-a-table-mmvL8xG1l2E/ |
 | hoop2 | https://www.pexels.com/photo/golden-earrings-with-diamonds-20943477/ |
 | hoop3 | https://unsplash.com/photos/a-pair-of-gold-earrings-sitting-on-top-of-a-white-box-HDeXaZeGvs0/ |
