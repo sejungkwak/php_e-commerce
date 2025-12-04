@@ -1,5 +1,7 @@
-<?php global $connection;
-require_once "../templates/header.php"; ?>
+<?php
+    global $connection;
+    require_once "../templates/header.php";
+?>
 
     <title>Starry Earrings | Register</title>
 </head>
@@ -14,7 +16,7 @@ require_once "../templates/header.php"; ?>
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Earrings</a>
+                    <a class="nav-link" href="earrings.php">Earrings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="register.php">Register</a>

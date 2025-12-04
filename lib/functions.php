@@ -9,7 +9,25 @@ function count_earrings() {
     $statement = $connection->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();
+
     return count($result);
+}
+
+// query the database to fetch earrings by category.
+// if no category is given, retrieve all earrings.
+function get_earrings($category) {
+    global $connection;
+    require_once "../src/DBconnect.php";
+
+    $query = "SELECT * FROM products WHERE stock > 0";
+    if ($category != null) {
+        $query .= " AND category = '$category'";
+    }
+    $statement = $connection->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+
+    return $result;
 }
 
 // sanitise user input

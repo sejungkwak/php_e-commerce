@@ -16,7 +16,7 @@
                     <a class="nav-link active" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Earrings</a>
+                    <a class="nav-link" href="earrings.php">Earrings</a>
                 </li>
 
 <?php
@@ -68,7 +68,7 @@ if ($_SESSION["active"] == true) {
                 <h1 class="card-title">Timeless Earrings for Every Occasion</h1>
                 <h2 class="card-text">Discover from <?php echo count_earrings() ?> pairs of earrings</h2>
                 <div>
-                    <a class="btn btn-dark btn-lg" href="#">Explore Now</a>
+                    <a class="btn btn-dark btn-lg" href="earrings.php">Explore Now</a>
                 </div>
             </div>
         </section>
