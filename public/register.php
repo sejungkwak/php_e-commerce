@@ -29,7 +29,7 @@ require_once "../templates/header.php"; ?>
                     <a class="nav-link active" href="register.php">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="login.php">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Logout</a>
@@ -85,7 +85,7 @@ if (isset($_POST['submit'])) {
                 <h2 class='card-header'>Success</h2>
                 <div class='card-body'>
                     <p class='card-text'>" . $new_user['email'] . " has been registered successfully.</p>
-                    <a href=# class='btn btn-success'>Sign in to my account</a>
+                    <a href='login.php' class='btn btn-success'>Sign in to my account</a>
                 </div>
             </div>";
     }
@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
                 </div>
                 <button type="submit" name="submit" class="btn btn-dark mb-4">Submit</button>
             </form>
-            <p><a href="#">I have an account</a></p>
+            <p><a href="login.php">I have an account</a></p>
         </section>
     </main>
 </body>
