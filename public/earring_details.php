@@ -79,6 +79,19 @@
 
                 if ($_SESSION["active"] == true) {
 
+                    if (isset($_POST['submit'])) {
+
+                        if (!isset($_SESSION["cart"])) {
+                            $_SESSION["cart"] = array();
+                        }
+
+                        if ($_SESSION["cart"][$earring['id']]) {
+                            $_SESSION["cart"][$earring['id']]++;
+                        } else {
+                            $_SESSION["cart"][$earring['id']] = 1;
+                        }
+                    }
+
                     echo "
                         <form action='' method='post'>
                             <button type='submit' name='submit' class=\"btn btn-primary btn-lg btn-block\">Add to cart</button>
