@@ -28,7 +28,7 @@
                     <a class="nav-link" href="#">Add Item</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Register</a>
+                    <a class="nav-link" href="register.php">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Login</a>
