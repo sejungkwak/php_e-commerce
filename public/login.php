@@ -1,5 +1,6 @@
 <?php
 global $connection;
+session_start();
 require_once "../templates/header.php";
 ?>
 
@@ -19,22 +20,10 @@ require_once "../templates/header.php";
                     <a class="nav-link" href="#">Earrings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Add Item</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="register.php">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
                 </li>
             </ul>
         </nav>
@@ -65,6 +54,8 @@ require_once "../templates/header.php";
             } elseif (empty($password)) {
                 $password_error = "Password is required";
             } elseif ($email && $password == $row['password']) {
+                $_SESSION['email'] = $email;
+                $_SESSION['active'] = true;
                 header("Location: index.php");
                 exit;
             } else {

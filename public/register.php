@@ -17,22 +17,10 @@ require_once "../templates/header.php"; ?>
                     <a class="nav-link" href="#">Earrings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Add Item</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" href="register.php">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
                 </li>
             </ul>
         </nav>

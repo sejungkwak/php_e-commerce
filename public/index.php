@@ -18,24 +18,46 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Earrings</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Add Item</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="register.php">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
-                </li>
+
+<?php
+if ($_SESSION["active"] == true) {
+    if ($_SESSION["role"] == "admin") {
+        echo "
+            <li class=\"nav-item\">
+                <a class=\"nav-link\" href=\"#\">Add Item</a>
+            </li>
+        ";
+    } else {
+        echo "
+        <li class=\"nav-item\">
+            <a class=\"nav-link\" href=\"#\">Cart</a>
+        </li>
+        <li class=\"nav-item\">
+            <a class=\"nav-link\" href=\"#\">Profile</a>
+        </li>
+        ";
+    }
+
+    echo "
+        <li class=\"nav-item\">
+            <form action='logout.php' method='post'>
+                <button type='submit' class=\"nav-link\">Logout</button>
+            </form>
+        </li>
+    ";
+
+} else {
+    echo "
+        <li class=\"nav-item\">
+            <a class=\"nav-link\" href=\"register.php\">Register</a>
+        </li>
+        <li class=\"nav-item\">
+            <a class=\"nav-link\" href=\"login.php\">Login</a>
+        </li>
+    ";
+}
+?>
+
             </ul>
         </nav>
     </header>
