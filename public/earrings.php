@@ -13,7 +13,7 @@
     <title>Starry Earrings | Products</title>
 </head>
 
-<body class="d-flex flex-column">
+<body class="d-flex flex-column vh-100">
 
 <header>
     <nav class="navbar navbar-expand-sm navbar-light bg-light justify-content-between m-0 px-5 py-2">
@@ -76,9 +76,19 @@ if ($_SESSION["active"] == true) {
             <div class="col-sm-4 col-md-3">
                 <div class="card text-center mb-2">
                     <div class="card-body">
-                        <img class="card-img-top" src="<?php echo $earring['image']; ?>">
-                        <h2 class="card-title"><?php echo $earring['name'] ?></h2>
-                        <p class="card-text"><?php echo "€" . $earring['price'] ?></p>
+                        <a href="earring_details.php?id=<?php echo $earring['id']?>" class="text-decoration-none text-dark">
+                            <img class="card-img-top" src="<?php echo $earring['image']; ?>">
+                        </a>
+                        <h2 class="card-title">
+                            <a href="earring_details.php?id=<?php echo $earring['id']?>" class="text-decoration-none text-dark">
+                                <?php echo $earring['name'] ?>
+                            </a>
+                        </h2>
+                        <p class="card-text">
+                            <a href="earring_details.php?id=<?php echo $earring['id']?>" class="text-decoration-none text-dark">
+                                <?php echo "€" . $earring['price'] ?>
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>

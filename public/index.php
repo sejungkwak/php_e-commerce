@@ -6,7 +6,7 @@
     <title>Starry Earrings | Home</title>
 </head>
 
-<body class="d-flex flex-column">
+<body class="d-flex flex-column vh-100">
 
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-light justify-content-between m-0 px-5 py-2">

@@ -30,6 +30,20 @@ function get_earrings($category) {
     return $result;
 }
 
+// retrieve single earring data by id.
+function get_earring($id) {
+    global $connection;
+    require_once "../src/DBconnect.php";
+
+    $query = "SELECT * FROM products WHERE id = :id";
+    $statement = $connection->prepare($query);
+    $statement->bindParam(":id", $id, PDO::PARAM_INT);
+    $statement->execute();
+    $result = $statement->fetch();
+
+    return $result;
+}
+
 // sanitise user input
 function escape($data) {
     $data = htmlspecialchars($data, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
