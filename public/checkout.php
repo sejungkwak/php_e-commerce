@@ -4,6 +4,8 @@
     require_once "../src/DBconnect.php";
     require_once "../templates/header.php";
 
+    $user_id = $_SESSION['user_id'];
+
     if (isset($_POST['submit'])) {
 
         $name_error = $address_error = $phone_error = "";
@@ -55,9 +57,15 @@
         }
     }
 
+    // redirect the user to the login page if they access it directly via the address bar.
+    if ($_SESSION["active"] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+
 ?>
 
-    <title>Starry Earrings | Cart</title>
+    <title>Starry Earrings | Checkout</title>
 </head>
 
 <body class="d-flex flex-column vh-100">
@@ -76,7 +84,7 @@
                     <a class="nav-link active" href="cart.php">Cart</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="profile.php?id=<?php echo $user_id; ?>">Profile</a>
                 </li>
                 <li class="nav-item">
                     <form action='logout.php' method='post'>

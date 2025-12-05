@@ -1,6 +1,40 @@
 <?php
     global $connection;
     require_once "../templates/header.php";
+
+    if (isset($_POST['submit'])) {
+        try {
+            require "../lib/functions.php";
+            require_once "../src/DBconnect.php";
+
+            $email_error = $password_error = $login_error = "";
+            $email = escape($_POST['email']);
+            $password = escape($_POST['password']);
+
+            $sql = "SELECT id, email, password FROM users WHERE email = :email";
+            $statement = $connection->prepare($sql);
+            $statement->bindParam(':email', $email, PDO::PARAM_STR);
+            $statement->execute();
+            $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if (empty($email)) {
+                $email_error = "Email is required.";
+            } elseif (empty($password)) {
+                $password_error = "Password is required.";
+            } elseif ($email && $password == $row['password']) {
+                $_SESSION['email'] = $email;
+                $_SESSION['user_id'] = $row['id'];
+                $_SESSION['active'] = true;
+                header("Location: index.php");
+                exit;
+            } else {
+                $login_error = "Invalid email or password.";
+            }
+        } catch (PDOException $e) {
+            echo $sql . "<br>" . $e->getMessage();
+        }
+    }
+
 ?>
 
     <title>Starry Earrings | Login</title>
@@ -31,41 +65,11 @@
         <section class="p-5">
             <h1 class="mb-5">Log in</h1>
             <form action="" method="post">
-
-<?php
-    if (isset($_POST['submit'])) {
-        try {
-            require "../lib/functions.php";
-            require_once "../src/DBconnect.php";
-
-            $email_error = $password_error = "";
-            $email = escape($_POST['email']);
-            $password = escape($_POST['password']);
-
-            $sql = "SELECT email, password FROM users WHERE email = :email";
-            $statement = $connection->prepare($sql);
-            $statement->bindParam(':email', $email, PDO::PARAM_STR);
-            $statement->execute();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-
-            if (empty($email)) {
-                $email_error = "Email is required";
-            } elseif (empty($password)) {
-                $password_error = "Password is required";
-            } elseif ($email && $password == $row['password']) {
-                $_SESSION['email'] = $email;
-                $_SESSION['active'] = true;
-                header("Location: index.php");
-                exit;
-            } else {
-                echo "<div class='alert alert-danger' role='alert'>Invalid email or password</div>";
-            }
-        } catch (PDOException $e) {
-            echo $sql . "<br>" . $e->getMessage();
-        }
-    }
-?>
-
+                <?php
+                if ($login_error && $login_error !== "") {
+                    echo "<div class='alert alert-danger' role='alert'>$login_error</div>";
+                }
+                ?>
                 <div class="form-group mb-3">
                     <label for="email">Email address</label>
                     <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>

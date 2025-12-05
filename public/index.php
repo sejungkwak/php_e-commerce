@@ -1,6 +1,8 @@
 <?php
     require "../lib/functions.php";
     require_once "../templates/header.php";
+
+    $user_id = $_SESSION['user_id'];
 ?>
 
     <title>Starry Earrings | Home</title>
@@ -19,44 +21,42 @@
                     <a class="nav-link" href="earrings.php">Earrings</a>
                 </li>
 
-<?php
-if ($_SESSION["active"] == true) {
-    if ($_SESSION["role"] == "admin") {
-        echo "
-            <li class=\"nav-item\">
-                <a class=\"nav-link\" href=\"#\">Add Item</a>
-            </li>
-        ";
-    } else {
-        echo "
-        <li class=\"nav-item\">
-            <a class=\"nav-link\" href=\"cart.php\">Cart</a>
-        </li>
-        <li class=\"nav-item\">
-            <a class=\"nav-link\" href=\"#\">Profile</a>
-        </li>
-        ";
-    }
-
-    echo "
-        <li class=\"nav-item\">
-            <form action='logout.php' method='post'>
-                <button type='submit' class=\"nav-link\">Logout</button>
-            </form>
-        </li>
-    ";
-
-} else {
-    echo "
-        <li class=\"nav-item\">
-            <a class=\"nav-link\" href=\"register.php\">Register</a>
-        </li>
-        <li class=\"nav-item\">
-            <a class=\"nav-link\" href=\"login.php\">Login</a>
-        </li>
-    ";
-}
-?>
+                    <?php
+                    if ($_SESSION["active"] == true) {
+                        if ($_SESSION["role"] == "admin") {
+                            echo "
+                                <li class=\"nav-item\">
+                                    <a class=\"nav-link\" href=\"#\">Add Item</a>
+                                </li>
+                            ";
+                        } else {
+                            echo "
+                            <li class=\"nav-item\">
+                                <a class=\"nav-link\" href=\"cart.php\">Cart</a>
+                            </li>
+                            <li class=\"nav-item\">
+                                <a class=\"nav-link\" href=\"profile.php?id=$user_id\">Profile</a>
+                            </li>
+                            ";
+                        }
+                        echo "
+                            <li class=\"nav-item\">
+                                <form action='logout.php' method='post'>
+                                    <button type='submit' class=\"nav-link\">Logout</button>
+                                </form>
+                            </li>
+                        ";
+                    } else {
+                        echo "
+                            <li class=\"nav-item\">
+                                <a class=\"nav-link\" href=\"register.php\">Register</a>
+                            </li>
+                            <li class=\"nav-item\">
+                                <a class=\"nav-link\" href=\"login.php\">Login</a>
+                            </li>
+                        ";
+                    }
+                    ?>
 
             </ul>
         </nav>

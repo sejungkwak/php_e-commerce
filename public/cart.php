@@ -1,6 +1,30 @@
 <?php
     require_once "../lib/functions.php";
     require_once "../templates/header.php";
+
+    $quantity_error = "";
+    $user_id = $_SESSION['user_id'];
+
+    if (isset($_POST['update'])) {
+        foreach ($_POST['quantity'] as $id => $new_quantity) {
+            $earring = get_earring($id);
+            if ($new_quantity > $earring['stock']) {
+                $quantity_error = "Quantity cannot exceed the available stock.";
+            } elseif($new_quantity < 0) {
+                $quantity_error = "Quantity cannot be negative.";
+            } elseif ($new_quantity == 0) {
+                unset($_SESSION['cart'][$id]);
+            } else {
+                $_SESSION['cart'][$id] = $new_quantity;
+            }
+        }
+    }
+
+    // redirect the user to the login page if they access it directly via the address bar.
+    if ($_SESSION["active"] !== true) {
+        header("Location: login.php");
+        exit;
+    }
 ?>
 
     <title>Starry Earrings | Cart</title>
@@ -22,7 +46,7 @@
                     <a class="nav-link active" href="cart.php">Cart</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="profile.php?id=<?php echo $user_id; ?>">Profile</a>
                 </li>
                 <li class="nav-item">
                     <form action='logout.php' method='post'>
@@ -38,22 +62,6 @@
             <h1 class="mb-5">Cart</h1>
                 <?php
                     $total = 5;
-                    $quantity_error = "";
-
-                    if (isset($_POST['update'])) {
-                        foreach ($_POST['quantity'] as $id => $new_quantity) {
-                            $earring = get_earring($id);
-                            if ($new_quantity > $earring['stock']) {
-                                $quantity_error = "Quantity cannot exceed the available stock.";
-                            } elseif($new_quantity < 0) {
-                                $quantity_error = "Quantity cannot be negative.";
-                            } elseif ($new_quantity == 0) {
-                                unset($_SESSION['cart'][$id]);
-                            } else {
-                                $_SESSION['cart'][$id] = $new_quantity;
-                            }
-                        }
-                    }
 
                     if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
                         echo "Your cart is empty.";

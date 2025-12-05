@@ -5,6 +5,8 @@
     $id = $_GET['id'];
     $earring = get_earring($id);
     $earring_name = $earring['name'];
+
+    $user_id = $_SESSION['user_id'];
 ?>
 
     <title>Starry Earrings | <?php echo $earring_name ?></title>
@@ -37,7 +39,7 @@
                     <a class=\"nav-link\" href=\"cart.php\">Cart</a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"#\">Profile</a>
+                    <a class=\"nav-link\" href=\"profile.php?id=$user_id\">Profile</a>
                 </li>
             ";
                     }
