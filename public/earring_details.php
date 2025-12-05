@@ -5,6 +5,7 @@
     $id = $_GET['id'];
     $earring = get_earring($id);
     $earring_name = $earring['name'];
+    $success_message = "";
 
     $user_id = $_SESSION['user_id'];
 
@@ -21,6 +22,9 @@
             } else {
                 $_SESSION["cart"][$earring['id']] = 1;
             }
+
+            $success_message = "
+                <p class='alert alert-success mb-3'>Item has been successfully added to your cart.</p>";
         }
 
         $button = "
@@ -85,6 +89,7 @@
     </header>
     <main>
         <section class="row p-5">
+            <?php echo $success_message ?>
             <div class="col-12 col-md-6">
                 <img src="<?php echo $earring['image'] ?>" class="w-100">
             </div>
