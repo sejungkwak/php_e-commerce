@@ -11,6 +11,7 @@
     }
 
     $user_id = $_SESSION['user_id'];
+    $user = get_user($user_id);
 
     if (isset($_POST['submit'])) {
 
@@ -50,6 +51,19 @@
                     $statement->bindValue(":id", $id, PDO::PARAM_INT);
                     $statement->execute();
                 }
+
+                // update the corresponding user's delivery information in the database.
+                $sql = "UPDATE users
+                    SET name = :name, 
+                        address = :address, 
+                        phone = :phone
+                    WHERE id = :id";
+                $statement = $connection->prepare($sql);
+                $statement->bindValue(":name", $name, PDO::PARAM_STR);
+                $statement->bindValue(":address", $address, PDO::PARAM_STR);
+                $statement->bindValue(":phone", $phone, PDO::PARAM_STR);
+                $statement->bindValue(":id", $user_id, PDO::PARAM_INT);
+                $statement->execute();
 
                 // assign display message
                 $success_message = "<p class='alert alert-success mb-3'>Thank you for your order!</p>";
@@ -111,17 +125,17 @@
                 <h2>Delivery Address</h2>
                 <div class="form-group mb-3">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" name="name" id="name" minlength="3" maxlength="30" placeholder="Name" required>
+                    <input type="text" class="form-control" name="name" id="name" minlength="3" maxlength="30" placeholder="<?php echo $user['name'] ?>" required>
                     <p class="text-danger"><?php echo $name_error; ?></p>
                 </div>
                 <div class="form-group mb-3">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address" id="address" minlength="3" maxlength="255" placeholder="Address" required>
+                    <input type="text" class="form-control" name="address" id="address" minlength="3" maxlength="255" placeholder="<?php echo $user['address'] ?>" required>
                     <p class="text-danger"><?php echo $address_error; ?></p>
                 </div>
                 <div class="form-group mb-3">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone Number" pattern="[0-9]{10}" required>
+                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="<?php echo $user['phone'] ?>" pattern="[0-9]{10}" required>
                     <small>Format: 0861234567</small>
                     <p class="text-danger"><?php echo $phone_error; ?></p>
                 </div>
