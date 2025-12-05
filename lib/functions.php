@@ -66,3 +66,24 @@ function validate_password($password) {
     }
     return true;
 }
+
+function validate_name($name) {
+    if (!preg_match("/^[a-zA-Z ]+$/", $name)) {
+        return false;
+    }
+    return true;
+}
+
+function validate_address($address) {
+    if (!preg_match("/^[a-zA-Z0-9-,. ]+$/", $address)) {
+        return false;
+    }
+    return true;
+}
+
+function validate_phone($phone) {
+    if (!preg_match("/^[0-9]{10}/", $phone)) {
+        return false;
+    }
+    return true;
+}
