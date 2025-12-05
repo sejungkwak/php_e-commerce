@@ -2,6 +2,12 @@
     require_once "../lib/functions.php";
     require_once "../templates/header.php";
 
+    // redirect the user to the login page if they access it directly via the address bar.
+    if ($_SESSION["active"] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+
     $quantity_error = "";
     $user_id = $_SESSION['user_id'];
 
@@ -18,12 +24,6 @@
                 $_SESSION['cart'][$id] = $new_quantity;
             }
         }
-    }
-
-    // redirect the user to the login page if they access it directly via the address bar.
-    if ($_SESSION["active"] !== true) {
-        header("Location: login.php");
-        exit;
     }
 ?>
 

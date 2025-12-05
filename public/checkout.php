@@ -4,6 +4,12 @@
     require_once "../src/DBconnect.php";
     require_once "../templates/header.php";
 
+    // redirect the user to the login page if they access it directly via the address bar.
+    if ($_SESSION["active"] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+
     $user_id = $_SESSION['user_id'];
 
     if (isset($_POST['submit'])) {
@@ -56,13 +62,6 @@
             }
         }
     }
-
-    // redirect the user to the login page if they access it directly via the address bar.
-    if ($_SESSION["active"] !== true) {
-        header("Location: login.php");
-        exit;
-    }
-
 ?>
 
     <title>Starry Earrings | Checkout</title>
