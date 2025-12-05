@@ -13,7 +13,7 @@
     $user_id = $_SESSION['user_id'];
     $success_message = "";
 
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['update'])) {
         $email_error = $password_error = $name_error = $address_error = $phone_error = "";
         $email = escape($_POST["email"]);
         $password = escape($_POST["password"]);
@@ -61,7 +61,7 @@
             }
         }
 
-        if (isset($_POST['submit']) && $statement) {
+        if (isset($_POST['update']) && $statement) {
             $success_message = "
                 <div class='card border-success mb-3'>
                     <h2 class='card-header'>Success</h2>
@@ -69,6 +69,23 @@
                         <p class='card-text'>Your profile updated successfully.</p>
                     </div>
                 </div>";
+        }
+    }
+
+    // delete account
+    if (isset($_POST['delete'])) {
+
+        try {
+            $sql = "DELETE FROM users WHERE id = :id";
+
+            $statement = $connection->prepare($sql);
+            $statement->bindParam(":id", $user_id);
+            $statement->execute();
+
+            header("Location: logout.php");
+            exit;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
     }
 
@@ -151,7 +168,8 @@
                     </div>
                     <?php }
                 } ?>
-                <button type="submit" name="submit" class="btn btn-dark mb-4">Update</button>
+                <button type="submit" name="update" class="btn btn-dark mb-4 d-block">Update</button>
+                <button type="submit" name="delete" class="btn btn-outline-danger">Delete account</button>
             </form>
         </section>
     </main>
