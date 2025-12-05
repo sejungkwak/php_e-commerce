@@ -20,7 +20,7 @@ function get_earrings($category) {
     require_once "../src/DBconnect.php";
 
     $query = "SELECT * FROM products WHERE stock > 0";
-    if ($category != null) {
+    if ($category == "stud" || $category == "drop" || $category == "hoop" || $category == "clip") {
         $query .= " AND category = '$category'";
     }
     $statement = $connection->prepare($query);

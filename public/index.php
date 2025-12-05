@@ -69,7 +69,7 @@
                     <div class="card">
                         <img class="card-img" src="../images/stud1.jpg" alt="Gold star stud earrings">
                         <div class="card-img-overlay">
-                            <a href="#" class="btn btn-dark">Shop Stud Earrings</a>
+                            <a href="earrings.php?category=stud" class="btn btn-dark">Shop Stud Earrings</a>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                     <div class="card">
                         <img class="card-img" src="../images/drop1.jpg" alt="Gold drop earrings with purple glass beads">
                         <div class="card-img-overlay">
-                            <a href="#" class="btn btn-dark">Shop Drop Earrings</a>
+                            <a href="earrings.php?category=drop" class="btn btn-dark">Shop Drop Earrings</a>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                     <div class="card">
                         <img class="card-img" src="../images/hoop1.jpg" alt="Twisted gold hoop earrings">
                         <div class="card-img-overlay">
-                            <a href="#" class="btn btn-dark">Shop Hoop Earrings</a>
+                            <a href="earrings.php?category=hoop" class="btn btn-dark">Shop Hoop Earrings</a>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                     <div class="card">
                         <img class="card-img" src="../images/clip1.jpg" alt="Multi-gemstone chandelier earrings">
                         <div class="card-img-overlay">
-                            <a href="#" class="btn btn-dark">Shop Clip Earrings</a>
+                            <a href="earrings.php?category=clip" class="btn btn-dark">Shop Clip Earrings</a>
                         </div>
                     </div>
                 </div>

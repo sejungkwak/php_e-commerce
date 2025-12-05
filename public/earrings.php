@@ -9,10 +9,16 @@
 
     $earrings = get_earrings($category);
 
+    if ($category == "stud" || $category == "drop" || $category == "hoop" || $category == "clip") {
+        $heading = "Earrings (" . ucfirst($category) . ")";
+    } else {
+        $heading = "Earrings (All)";
+    }
+
     $user_id = $_SESSION['user_id'];
 ?>
 
-    <title>Starry Earrings | Products</title>
+    <title>Starry Earrings | Earrings</title>
 </head>
 
 <body class="d-flex flex-column vh-100">
@@ -60,7 +66,7 @@
     </header>
     <main>
         <section class="p-5">
-            <h1 class="mb-5">Earrings</h1>
+            <h1 class="mb-5"><?php echo $heading ?></h1>
             <div class="row">
                 <?php foreach ($earrings as $earring) { ?>
                 <div class="col-sm-4 col-md-3">
