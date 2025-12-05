@@ -51,7 +51,7 @@ function get_user($id) {
 
     $query = "SELECT * FROM users WHERE id = :id";
     $statement = $connection->prepare($query);
-    $statement->bindParam(":id", $id, PDO::PARAM_INT);
+    $statement->bindValue(":id", $id, PDO::PARAM_INT);
     $statement->execute();
     $result = $statement->fetch(PDO::FETCH_ASSOC);
 
