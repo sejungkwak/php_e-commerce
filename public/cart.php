@@ -75,6 +75,9 @@
                             $stock = $earring['stock'];
                             $subtotal = $price * $quantity;
                             $total += $subtotal;
+                            $subtotal = number_format($subtotal, 2, '.', '');
+                            $total = number_format($total, 2, '.', '');
+                            $_SESSION['total'] = $total;
                             echo "
                                 <tr>
                                     <td>
@@ -90,7 +93,7 @@
                                         <p>($stock in stock)</p>
                                         <p class='text-danger'>$quantity_error</p>
                                     </td>
-                                    <td class='text-end'>€" . number_format($subtotal, 2, ".", ",") . "</td>
+                                    <td class='text-end'>€$subtotal</td>
                                 </tr>
                             ";
                         }
@@ -99,7 +102,10 @@
                             </table>
                         </form>
                         <p class='text-end'>Delivery: €5.00</p>
-                        <h2 class='text-end'>Total: €" . number_format($total, 2, ".", ",") . "</h2>
+                        <h2 class='text-end'>Total: €$total</h2>
+                        <div class='text-end mt-3'>
+                            <a href='checkout.php' class='btn btn-primary btn-lg'>Proceed to Checkout</a>
+                        </div>
                         ";
                     }
                 ?>
