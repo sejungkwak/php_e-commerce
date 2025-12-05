@@ -3,7 +3,7 @@ use starryEarings;
 
 CREATE TABLE IF NOT EXISTS users (
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(20) NOT NULL,
     name VARCHAR(30),
     address VARCHAR(255),
@@ -20,6 +20,9 @@ CREATE TABLE IF NOT EXISTS products (
     stock INT(11) NOT NULL DEFAULT 0,
     image VARCHAR(255)
 );
+
+INSERT INTO users (email, password) VALUES
+    ('user@example.com', 'password');
 
 INSERT INTO products (name, category, price, description, stock, image) VALUES
     ('Star', 'stud', 39.99, 'Delicate star-shaped studs in warm rose gold tone, perfect for everyday wear!', 50, '../images/stud1.jpg'),
