@@ -67,7 +67,22 @@ function escape($data) {
     return ($data);
 }
 
-function validate_email($email) {
+function validate_email($email, $id=0) {
+
+    // check if the email is already exists in the database.
+    global $connection;
+    require_once "../src/DBconnect.php";
+
+    $query = "SELECT * FROM users WHERE NOT id = :id AND email = :email";
+    $statement = $connection->prepare($query);
+    $statement->bindValue(":id", $id, PDO::PARAM_INT);
+    $statement->bindValue(":email", $email, PDO::PARAM_STR);
+    $statement->execute();
+
+    if ($statement->fetch(PDO::FETCH_ASSOC)) {
+        return false;
+    }
+
     if (!filter_var($email, FILTER_SANITIZE_EMAIL)) {
         return false;
     }

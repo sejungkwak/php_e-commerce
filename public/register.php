@@ -1,6 +1,56 @@
 <?php
     global $connection;
+    require "../lib/functions.php";
+    require_once "../src/DBconnect.php";
     require_once "../templates/header.php";
+
+    $success_message = "";
+
+    if (isset($_POST['submit'])) {
+
+        $email_error = $password_error = $password_confirm_error = "";
+        $email = escape($_POST['email']);
+        $password = escape($_POST['password']);
+        $password_confirm = escape($_POST['password_confirm']);
+
+        if (empty($email)) {
+            $email_error = "Email is required.";
+        } elseif (empty($password)) {
+            $password_error = "Password is required.";
+        } elseif (empty($password_confirm)) {
+            $password_confirm_error = "Confirm password is required.";
+        } elseif (!validate_email($email)) {
+            $email_error = "Email is invalid or already in use.";
+        } elseif (!validate_password($password)) {
+            $password_error = "Password must be 8-20 characters long.";
+        } elseif ($password != $password_confirm) {
+            $password_confirm_error = "Passwords do not match.";
+        } else {
+            try {
+                $new_user = array(
+                    "email" => $email,
+                    "password" => $password
+                );
+                $sql = sprintf( "INSERT INTO %s (%s) VALUES (%s)", "users", implode(", ", array_keys($new_user)), ":" . implode(", :", array_keys($new_user)));
+                $statement = $connection->prepare($sql);
+                $statement->execute($new_user);
+            } catch (PDOException $e) {
+                echo $sql . "<br>" . $e->getMessage();
+            }
+        }
+
+        if (isset($_POST['submit']) && $statement) {
+            $success_message = "
+                <div class='card border-success mb-3'>
+                    <h2 class='card-header'>Success</h2>
+                    <div class='card-body'>
+                        <p class='card-text'>Your account has been created successfully.</p>
+                        <a href='login.php' class='btn btn-success'>Sign in to my account</a>
+                    </div>
+                </div>";
+        }
+    }
+
 ?>
 
     <title>Starry Earrings | Register</title>
@@ -30,59 +80,10 @@
     <main>
         <section class="p-5">
             <h1 class="mb-5">Create Account</h1>
+
+            <?php echo $success_message ?>
+
             <form action="" method="post">
-
-<?php
-
-if (isset($_POST['submit'])) {
-    require "../lib/functions.php";
-    require_once "../src/DBconnect.php";
-
-    $email_error = $password_error = $password_confirm_error = "";
-    $email = escape($_POST['email']);
-    $password = escape($_POST['password']);
-    $password_confirm = escape($_POST['password_confirm']);
-
-    if (empty($email)) {
-        $email_error = "Email is required";
-    } elseif (empty($password)) {
-        $password_error = "Password is required";
-    } elseif (empty($password_confirm)) {
-        $password_confirm_error = "Confirm password is required";
-    } elseif (!validate_email($email)) {
-        $email_error = "Invalid email";
-    } elseif (!validate_password($password)) {
-        $password_error = "Password must be 8-20 characters long.";
-    } elseif ($password != $password_confirm) {
-        $password_confirm_error = "Passwords do not match.";
-    } else {
-        try {
-            $new_user = array(
-                "email" => $email,
-                "password" => $password
-            );
-            $sql = sprintf( "INSERT INTO %s (%s) VALUES (%s)", "users", implode(", ", array_keys($new_user)), ":" . implode(", :", array_keys($new_user)));
-            $statement = $connection->prepare($sql);
-            $statement->execute($new_user);
-        } catch (PDOException $e) {
-            echo $sql . "<br>" . $e->getMessage();
-        }
-    }
-
-    if (isset($_POST['submit']) && $statement) {
-        echo "
-            <div class='card border-success mb-3'>
-                <h2 class='card-header'>Success</h2>
-                <div class='card-body'>
-                    <p class='card-text'>" . $new_user['email'] . " has been registered successfully.</p>
-                    <a href='login.php' class='btn btn-success'>Sign in to my account</a>
-                </div>
-            </div>";
-    }
-}
-
-?>
-
                 <div class="form-group mb-3">
                     <label for="email">Email address</label>
                     <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
@@ -104,6 +105,5 @@ if (isset($_POST['submit'])) {
             <p><a href="login.php">I have an account</a></p>
         </section>
     </main>
-</body>
 
 <?php require_once "../templates/footer.php"; ?>

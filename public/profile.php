@@ -25,8 +25,8 @@
             $email_error = "Email is required";
         } elseif (empty($password)) {
             $password_error = "Password is required";
-        } elseif (!validate_email($email)) {
-            $email_error = "Invalid email.";
+        } elseif (!validate_email($email, $user_id)) {
+            $email_error = "Email is invalid or already in use.";
         } elseif (!validate_password($password)) {
             $password_error = "Password must be 8-20 characters long.";
         } elseif ($name && !validate_name($name)) {
