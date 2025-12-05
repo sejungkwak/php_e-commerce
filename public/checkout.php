@@ -125,17 +125,17 @@
                 <h2>Delivery Address</h2>
                 <div class="form-group mb-3">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" name="name" id="name" minlength="3" maxlength="30" placeholder="<?php echo $user['name'] ?>" required>
+                    <input type="text" class="form-control" name="name" id="name" minlength="3" maxlength="30" value="<?php echo $user['name'] ?>" required>
                     <p class="text-danger"><?php echo $name_error; ?></p>
                 </div>
                 <div class="form-group mb-3">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address" id="address" minlength="3" maxlength="255" placeholder="<?php echo $user['address'] ?>" required>
+                    <input type="text" class="form-control" name="address" id="address" minlength="3" maxlength="255" value="<?php echo $user['address'] ?>" required>
                     <p class="text-danger"><?php echo $address_error; ?></p>
                 </div>
                 <div class="form-group mb-3">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="<?php echo $user['phone'] ?>" pattern="[0-9]{10}" required>
+                    <input type="tel" class="form-control" name="phone" id="phone" value="<?php echo $user['phone'] ?>" pattern="[0-9]{10}" required>
                     <small>Format: 0861234567</small>
                     <p class="text-danger"><?php echo $phone_error; ?></p>
                 </div>
