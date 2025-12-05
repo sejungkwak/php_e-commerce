@@ -23,23 +23,13 @@
 
                     <?php
                     if ($_SESSION["active"] == true) {
-                        if ($_SESSION["role"] == "admin") {
-                            echo "
-                                <li class=\"nav-item\">
-                                    <a class=\"nav-link\" href=\"#\">Add Item</a>
-                                </li>
-                            ";
-                        } else {
-                            echo "
+                        echo "
                             <li class=\"nav-item\">
                                 <a class=\"nav-link\" href=\"cart.php\">Cart</a>
                             </li>
                             <li class=\"nav-item\">
                                 <a class=\"nav-link\" href=\"profile.php?id=$user_id\">Profile</a>
                             </li>
-                            ";
-                        }
-                        echo "
                             <li class=\"nav-item\">
                                 <form action='logout.php' method='post'>
                                     <button type='submit' class=\"nav-link\">Logout</button>

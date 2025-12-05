@@ -7,6 +7,34 @@
     $earring_name = $earring['name'];
 
     $user_id = $_SESSION['user_id'];
+
+    if ($_SESSION["active"] == true) {
+
+        if (isset($_POST['submit'])) {
+
+            if (!isset($_SESSION["cart"])) {
+                $_SESSION["cart"] = array();
+            }
+
+            if ($_SESSION["cart"][$earring['id']]) {
+                $_SESSION["cart"][$earring['id']]++;
+            } else {
+                $_SESSION["cart"][$earring['id']] = 1;
+            }
+        }
+
+        $button = "
+            <form action='' method='post'>
+                <button type='submit' name='submit' class=\"btn btn-primary btn-lg btn-block\">Add to cart</button>
+            </form>
+        ";
+
+    } else {
+        $button = "
+            <a href='login.php' class='btn btn-primary btn-lg btn-block'>Log in to add to cart</a>
+        ";
+    }
+
 ?>
 
     <title>Starry Earrings | <?php echo $earring_name ?></title>
@@ -27,40 +55,28 @@
 
                 <?php
                 if ($_SESSION["active"] == true) {
-                    if ($_SESSION["role"] == "admin") {
-                        echo "
-                <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"#\">Add Item</a>
-                </li>
-            ";
-                    } else {
-                        echo "
-                <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"cart.php\">Cart</a>
-                </li>
-                <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"profile.php?id=$user_id\">Profile</a>
-                </li>
-            ";
-                    }
-
                     echo "
-            <li class=\"nav-item\">
-                <form action='logout.php' method='post'>
-                    <button type='submit' class=\"nav-link\">Logout</button>
-                </form>
-            </li>
-        ";
-
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"cart.php\">Cart</a>
+                        </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"profile.php?id=$user_id\">Profile</a>
+                        </li>
+                        <li class=\"nav-item\">
+                            <form action='logout.php' method='post'>
+                                <button type='submit' class=\"nav-link\">Logout</button>
+                            </form>
+                        </li>
+                    ";
                 } else {
                     echo "
-            <li class=\"nav-item\">
-                <a class=\"nav-link\" href=\"register.php\">Register</a>
-            </li>
-            <li class=\"nav-item\">
-                <a class=\"nav-link\" href=\"login.php\">Login</a>
-            </li>
-        ";
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"register.php\">Register</a>
+                        </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"login.php\">Login</a>
+                        </li>
+                    ";
                 }
                 ?>
 
@@ -76,37 +92,7 @@
                 <h1><?php echo $earring_name ?></h1>
                 <p><?php echo $earring['price'] ?></p>
                 <p><?php echo $earring['description'] ?></p>
-
-                <?php
-
-                if ($_SESSION["active"] == true) {
-
-                    if (isset($_POST['submit'])) {
-
-                        if (!isset($_SESSION["cart"])) {
-                            $_SESSION["cart"] = array();
-                        }
-
-                        if ($_SESSION["cart"][$earring['id']]) {
-                            $_SESSION["cart"][$earring['id']]++;
-                        } else {
-                            $_SESSION["cart"][$earring['id']] = 1;
-                        }
-                    }
-
-                    echo "
-                        <form action='' method='post'>
-                            <button type='submit' name='submit' class=\"btn btn-primary btn-lg btn-block\">Add to cart</button>
-                        </form>
-                    ";
-                } else {
-                    echo "
-                        <a href='login.php' class='btn btn-primary btn-lg btn-block'>Log in to add to cart</a>
-                    ";
-                }
-
-                ?>
-
+                <?php echo $button ?>
             </div>
         </section>
     </main>
