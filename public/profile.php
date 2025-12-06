@@ -139,48 +139,32 @@
             <?php echo $success_message ?>
 
             <form action="" method="post">
-                <?php
-                foreach ($user as $key => $value) {
-
-                    $ucfirst_key = ucfirst($key);
-                    $attribute = "";
-
-                    if ($key == "phone") {
-                        $input_type = "tel";
-                    } elseif ($key == "name" || $key == "address") {
-                        $input_type = "text";
-                    } else {
-                        $input_type = $key;
-                    }
-
-                    if ($key == "email" || $key == "password") {
-                        $required = "required";
-                    } else {
-                        $required = "";
-                    }
-
-                    if ($key == "password") {
-                        $attribute = "minlength='8' maxlength='20'";
-                    } elseif ($key == "name") {
-                        $attribute = "minlength='3' maxlength='30'";
-                    } elseif ($key == "phone") {
-                        $attribute = "pattern='[0-9]{10}'";
-                    }
-
-                    if ($key !== "id" && $key !== "created_at") {?>
-                    <div class='form-group mb-3'>
-                        <?php echo "
-                            <label for='$key'>$ucfirst_key</label>
-                            <input type='$input_type' name='$key' id='$key' class='form-control' value='$value' placeholder='$ucfirst_key' $attribute $required>";
-                        if ($key == "phone") {
-                            echo "<small>Format: 0861234567</small>";
-                        }
-                        echo " 
-                            <p class='text-danger'>" . ${$key . "_error"} . "</p>";
-                        ?>
-                    </div>
-                    <?php }
-                } ?>
+                <div class='form-group mb-3'>
+                    <label for="email">Email address</label>
+                    <input type="email" name="email" id="email" class="form-control" value="<?php echo $user["email"]; ?>" placeholder="Email" required>
+                    <p class='text-danger'><?php echo $email_error; ?></p>
+                </div>
+                <div class='form-group mb-3'>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" value="<?php echo $user["password"]; ?>" minlength="8" maxlength="20" placeholder="Password" required>
+                    <p class='text-danger'><?php echo $password_error; ?></p>
+                </div>
+                <div class='form-group mb-3'>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" class="form-control" value="<?php echo $user["name"]; ?>" minlength="3" maxlength="30" placeholder="Name">
+                    <p class='text-danger'><?php echo $name_error; ?></p>
+                </div>
+                <div class='form-group mb-3'>
+                    <label for="address">Address</label>
+                    <input type="text" name="address" id="address" class="form-control" value="<?php echo $user["address"]; ?>" placeholder="Address">
+                    <p class='text-danger'><?php echo $address_error; ?></p>
+                </div>
+                <div class='form-group mb-3'>
+                    <label for="phone">Phone number</label>
+                    <input type="tel" name="phone" id="phone" class="form-control" value="<?php echo $user["phone"]; ?>" pattern="[0-9]{10}" placeholder="Phone Number">
+                    <small>Format: 0861234567</small>
+                    <p class='text-danger'><?php echo $phone_error; ?></p>
+                </div>
                 <button type="submit" name="update" class="btn btn-dark mb-4 d-block">Update</button>
                 <button type="submit" name="delete" class="btn btn-outline-danger">Delete account</button>
             </form>
