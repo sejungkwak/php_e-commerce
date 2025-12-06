@@ -161,9 +161,13 @@
                     if ($key !== "id" && $key !== "created_at") {?>
                     <div class='form-group mb-3'>
                         <?php echo "
-                        <label for='$key'>$ucfirst_key</label>
-                        <input type='$input_type' name='$key' id='$key' class='form-control' value='$value' placeholder='$ucfirst_key' $required>
-                        <p class='text-danger'>" . ${$key . "_error"} . "</p>";
+                            <label for='$key'>$ucfirst_key</label>
+                            <input type='$input_type' name='$key' id='$key' class='form-control' value='$value' placeholder='$ucfirst_key' $required>";
+                        if ($key == "phone") {
+                            echo "<small>Format: 0861234567</small>";
+                        }
+                        echo " 
+                            <p class='text-danger'>" . ${$key . "_error"} . "</p>";
                         ?>
                     </div>
                     <?php }
