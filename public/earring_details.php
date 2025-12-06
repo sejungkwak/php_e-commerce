@@ -95,7 +95,7 @@
             </div>
             <div class="col-12 col-md-6">
                 <h1><?php echo $earring_name ?></h1>
-                <p><?php echo $earring['price'] ?></p>
+                <p>€<?php echo $earring['price'] ?></p>
                 <p><?php echo $earring['description'] ?></p>
                 <?php echo $button ?>
             </div>
