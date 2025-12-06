@@ -143,6 +143,7 @@
                 foreach ($user as $key => $value) {
 
                     $ucfirst_key = ucfirst($key);
+                    $attribute = "";
 
                     if ($key == "phone") {
                         $input_type = "tel";
@@ -158,11 +159,19 @@
                         $required = "";
                     }
 
+                    if ($key == "password") {
+                        $attribute = "minlength='8' maxlength='20'";
+                    } elseif ($key == "name") {
+                        $attribute = "minlength='3' maxlength='30'";
+                    } elseif ($key == "phone") {
+                        $attribute = "pattern='[0-9]{10}'";
+                    }
+
                     if ($key !== "id" && $key !== "created_at") {?>
                     <div class='form-group mb-3'>
                         <?php echo "
                             <label for='$key'>$ucfirst_key</label>
-                            <input type='$input_type' name='$key' id='$key' class='form-control' value='$value' placeholder='$ucfirst_key' $required>";
+                            <input type='$input_type' name='$key' id='$key' class='form-control' value='$value' placeholder='$ucfirst_key' $attribute $required>";
                         if ($key == "phone") {
                             echo "<small>Format: 0861234567</small>";
                         }
