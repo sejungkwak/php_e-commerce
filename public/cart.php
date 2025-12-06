@@ -8,21 +8,22 @@
         exit;
     }
 
-    $quantity_error = "";
+    $quantity_error = array();
     $user_id = $_SESSION['user_id'];
 
     if (isset($_POST['update'])) {
-        foreach ($_POST['quantity'] as $id => $new_quantity) {
-            $earring = get_earring($id);
-            if ($new_quantity > $earring['stock']) {
-                $quantity_error = "Quantity cannot exceed the available stock.";
-            } elseif($new_quantity < 0) {
-                $quantity_error = "Quantity cannot be negative.";
-            } elseif ($new_quantity == 0) {
-                unset($_SESSION['cart'][$id]);
-            } else {
-                $_SESSION['cart'][$id] = $new_quantity;
-            }
+        $product_id = key($_POST['update']);
+        $new_quantity = (int)$_POST['quantity'][$product_id];
+        $earring = get_earring($product_id);
+
+        if ($new_quantity > $earring['stock']) {
+            $quantity_error[$product_id] = "Quantity cannot exceed the available stock.";
+        } elseif($new_quantity < 0) {
+            $quantity_error[$product_id] = "Quantity cannot be negative.";
+        } elseif ($new_quantity == 0) {
+            unset($_SESSION['cart'][$product_id]);
+        } else {
+            $_SESSION['cart'][$product_id] = $new_quantity;
         }
     }
 ?>
@@ -61,61 +62,63 @@
         <section class="p-5">
             <h1 class="mb-5">Cart</h1>
                 <?php
-                    $total = 5;
+                $total = 5;
 
-                    if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
-                        echo "Your cart is empty.";
-                    } else {
+                if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+                    echo "Your cart is empty.";
+                } else {
+                    echo "
+                        <form action='' method='post'>
+                        <table class='table'>
+                            <thead>
+                                <th scope='col' class='col-3'>Item</th>
+                                <th scope='col' class='col-3 text-end'>Price</th>
+                                <th scope='col' class='col-3 text-end'>Quantity</th>
+                                <th scope='col' class='col-3 text-end'>Subtotal</th>
+                            </thead>
+                            <tbody>
+                    ";
+                    foreach ($_SESSION['cart'] as $id => $quantity) {
+                        $earring = get_earring($id);
+                        $price = $earring['price'];
+                        $stock = $earring['stock'];
+                        $subtotal = $price * $quantity;
+                        $total += $subtotal;
+                        $subtotal = number_format($subtotal, 2, '.', '');
+                        $total = number_format($total, 2, '.', '');
+                        $_SESSION['total'] = $total;
                         echo "
-                            <form action='' method='post'>
-                            <table class='table'>
-                                <thead>
-                                    <th scope='col' class='col-3'>Item</th>
-                                    <th scope='col' class='col-3 text-end'>Price</th>
-                                    <th scope='col' class='col-3 text-end'>Quantity</th>
-                                    <th scope='col' class='col-3 text-end'>Subtotal</th>
-                                </thead>
-                                <tbody>
-                        ";
-                        foreach ($_SESSION['cart'] as $id => $quantity) {
-                            $earring = get_earring($id);
-                            $price = $earring['price'];
-                            $stock = $earring['stock'];
-                            $subtotal = $price * $quantity;
-                            $total += $subtotal;
-                            $subtotal = number_format($subtotal, 2, '.', '');
-                            $total = number_format($total, 2, '.', '');
-                            $_SESSION['total'] = $total;
-                            echo "
-                                <tr>
-                                    <td>
-                                        <div class='row'>
-                                            <img src='{$earring['image']}' class='col-4'>
-                                            <p class='col-8'>{$earring['name']}</p>
-                                        </div>
-                                    </td>
-                                    <td class='text-end'>€$price</td>
-                                    <td class='text-end'>
-                                        <input type='number' name='quantity[$id]' value='$quantity' min='0' max='$stock'>
-                                        <button type='submit' name='update' class='btn btn-outline-primary'>Update</button>
-                                        <p>($stock in stock)</p>
-                                        <p class='text-danger'>$quantity_error</p>
-                                    </td>
-                                    <td class='text-end'>€$subtotal</td>
-                                </tr>
-                            ";
-                        }
-                        echo "
-                                </tbody>
-                            </table>
-                        </form>
-                        <p class='text-end'>Delivery: €5.00</p>
-                        <h2 class='text-end'>Total: €$total</h2>
-                        <div class='text-end mt-3'>
-                            <a href='checkout.php' class='btn btn-primary btn-lg'>Proceed to Checkout</a>
-                        </div>
+                            <tr>
+                                <td>
+                                    <div class='row'>
+                                        <img src='{$earring['image']}' class='col-4'>
+                                        <p class='col-8'>{$earring['name']}</p>
+                                    </div>
+                                </td>
+                                <td class='text-end'>€$price</td>
+                                <td class='text-end'>
+                                    <div class='input-group'>
+                                        <input type='number' name='quantity[$id]' class='form-control text-end' value='$quantity' min='0' max='$stock'>
+                                        <button type='submit' name='update[$id]' class='btn btn-outline-primary'>Update</button>
+                                    </div>
+                                    <p class='text-end'>($stock in stock)</p>
+                                    <p class='text-danger'>{$quantity_error['$id']}</p>
+                                </td>
+                                <td class='text-end'>€$subtotal</td>
+                            </tr>
                         ";
                     }
+                    echo "
+                            </tbody>
+                        </table>
+                    </form>
+                    <p class='text-end'>Delivery: €5.00</p>
+                    <h2 class='text-end'>Total: €$total</h2>
+                    <div class='text-end mt-3'>
+                        <a href='checkout.php' class='btn btn-primary btn-lg'>Proceed to Checkout</a>
+                    </div>
+                    ";
+                }
                 ?>
         </section>
     </main>
