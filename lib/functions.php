@@ -1,18 +1,5 @@
 <?php
 
-// count the total number of earrings in stock
-function count_earrings() {
-    global $connection;
-    require_once "../src/DBconnect.php";
-
-    $query = "SELECT * FROM products WHERE stock > 0";
-    $statement = $connection->prepare($query);
-    $statement->execute();
-    $result = $statement->fetchAll();
-
-    return count($result);
-}
-
 // query the database to fetch earrings by category.
 // if no category is given, retrieve all earrings.
 function get_earrings($category) {
@@ -28,6 +15,11 @@ function get_earrings($category) {
     $result = $statement->fetchAll();
 
     return $result;
+}
+
+// count the total number of earrings in stock
+function count_earrings() {
+    return count(get_earrings(null));
 }
 
 // retrieve single earring data by id.
