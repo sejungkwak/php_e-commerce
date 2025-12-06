@@ -1,6 +1,11 @@
 # php_e-commerce
 A PHP E-commerce website with CRUD and Sessions for Web Application Development
 
+## Functionality Testing
+- I have tested the site's functionality manually in Chrome version 142.0.
+- All the tests passed.
+- Please refer to [this spreadsheet](https://docs.google.com/spreadsheets/d/1TTTwNqedUDXxb7q8AAH7tvwv-v9oBAoY42GFjZ2Q8Pw/edit?usp=sharing) for more details.
+
 ## Image Sources
 
 All earring images used in this project are sourced from the following:
