@@ -11,11 +11,7 @@
             $email = escape($_POST['email']);
             $password = escape($_POST['password']);
 
-            $sql = "SELECT id, email, password FROM users WHERE email = :email";
-            $statement = $connection->prepare($sql);
-            $statement->bindParam(':email', $email, PDO::PARAM_STR);
-            $statement->execute();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
+            $row = get_user_by_email($email);
 
             if (empty($email)) {
                 $email_error = "Email is required.";
@@ -31,7 +27,7 @@
                 $login_error = "Invalid email or password.";
             }
         } catch (PDOException $e) {
-            echo $sql . "<br>" . $e->getMessage();
+            echo $e->getMessage();
         }
     }
 

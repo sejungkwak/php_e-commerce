@@ -84,6 +84,20 @@ function get_user($id) {
     return $result;
 }
 
+// retrieve single user data by email.
+function get_user_by_email($email) {
+    global $connection;
+    require_once "../src/DBconnect.php";
+
+    $query = "SELECT id, email, password FROM users WHERE email = :email";
+    $statement = $connection->prepare($query);
+    $statement->bindValue(":email", $email, PDO::PARAM_STR);
+    $statement->execute();
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+
 // update single user data in the database.
 function update_user($data) {
     global $connection;
