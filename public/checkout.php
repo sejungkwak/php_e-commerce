@@ -53,17 +53,16 @@
                 }
 
                 // update the corresponding user's delivery information in the database.
-                $sql = "UPDATE users
-                    SET name = :name, 
-                        address = :address, 
-                        phone = :phone
-                    WHERE id = :id";
-                $statement = $connection->prepare($sql);
-                $statement->bindValue(":name", $name, PDO::PARAM_STR);
-                $statement->bindValue(":address", $address, PDO::PARAM_STR);
-                $statement->bindValue(":phone", $phone, PDO::PARAM_STR);
-                $statement->bindValue(":id", $user_id, PDO::PARAM_INT);
-                $statement->execute();
+                $updated_user = [
+                    "id" => $user_id,
+                    "email" => $user["email"],
+                    "password" => $user["password"],
+                    "name" => $name,
+                    "address" => $address,
+                    "phone" => $phone
+                ];
+                update_user($updated_user);
+                $user = get_user($user_id);
 
                 // assign display message
                 $success_message = "<p class='alert alert-success mb-3'>Thank you for your order!</p>";

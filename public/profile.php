@@ -45,30 +45,18 @@
                     "address" => $address,
                     "phone" => $phone
                 ];
+                update_user($updated_user);
 
-                $sql = "UPDATE users 
-                        SET email = :email, 
-                            password = :password, 
-                            name = :name, 
-                            address = :address, 
-                            phone = :phone 
-                        WHERE id = :id";
-
-                $statement = $connection->prepare($sql);
-                $statement->execute($updated_user);
+                $success_message = "
+                    <div class='card border-success mb-3'>
+                        <h2 class='card-header'>Success</h2>
+                        <div class='card-body'>
+                            <p class='card-text'>Your profile updated successfully.</p>
+                        </div>
+                    </div>";
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
-        }
-
-        if (isset($_POST['update']) && $statement) {
-            $success_message = "
-                <div class='card border-success mb-3'>
-                    <h2 class='card-header'>Success</h2>
-                    <div class='card-body'>
-                        <p class='card-text'>Your profile updated successfully.</p>
-                    </div>
-                </div>";
         }
     }
 

@@ -68,6 +68,31 @@ function get_user($id) {
     return $result;
 }
 
+// update single user data in the database.
+function update_user($data) {
+    global $connection;
+    require_once "../src/DBconnect.php";
+
+    $query = "UPDATE users
+              SET email = :email,
+                  password = :password,
+                  name = :name,
+                  address = :address,
+                  phone = :phone
+              WHERE id = :id";
+
+    $statement = $connection->prepare($query);
+    $statement->bindValue(":id", $data["id"], PDO::PARAM_INT);
+    $statement->bindValue(":email", $data["email"], PDO::PARAM_STR);
+    $statement->bindValue(":password", $data["password"], PDO::PARAM_STR);
+    $statement->bindValue(":name", $data["name"], PDO::PARAM_STR);
+    $statement->bindValue(":address", $data["address"], PDO::PARAM_STR);
+    $statement->bindValue(":phone", $data["phone"], PDO::PARAM_STR);
+    $statement->execute();
+
+    return $statement;
+}
+
 // sanitise user input
 function escape($data) {
     $data = htmlspecialchars($data, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
