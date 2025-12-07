@@ -57,15 +57,10 @@ function save_user($data) {
     global $connection;
     require_once "../src/DBconnect.php";
 
-    $user = [
-        "email" => $data["email"],
-        "password" => $data["password"]
-    ];
-
     $query = sprintf( "INSERT INTO %s (%s) VALUES (%s)", "users",
-        implode(", ", array_keys($user)), ":" . implode(", :", array_keys($user)));
+        implode(", ", array_keys($data)), ":" . implode(", :", array_keys($data)));
     $statement = $connection->prepare($query);
-    $statement->execute($user);
+    $statement->execute($data);
 
     return $statement;
 }
