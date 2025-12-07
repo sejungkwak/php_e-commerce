@@ -1,6 +1,9 @@
 # php_e-commerce
 A PHP E-commerce website with CRUD and Sessions for Web Application Development
 
+## Database Initialisation
+To create the database, please open install.php in your browser (e.g. http://localhost/php_e-commerce/install.php)
+
 ## Functionality Testing
 - I have tested the site's functionality manually in Chrome version 142.0.
 - All the tests passed.
