@@ -36,6 +36,24 @@ function get_earring($id) {
     return $result;
 }
 
+// create a new user record in the database.
+function save_user($data) {
+    global $connection;
+    require_once "../src/DBconnect.php";
+
+    $user = [
+        "email" => $data["email"],
+        "password" => $data["password"]
+    ];
+
+    $query = sprintf( "INSERT INTO %s (%s) VALUES (%s)", "users",
+        implode(", ", array_keys($user)), ":" . implode(", :", array_keys($user)));
+    $statement = $connection->prepare($query);
+    $statement->execute($user);
+
+    return $statement;
+}
+
 // retrieve single user data by id.
 function get_user($id) {
     global $connection;

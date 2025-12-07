@@ -31,11 +31,9 @@
                     "email" => $email,
                     "password" => $password
                 );
-                $sql = sprintf( "INSERT INTO %s (%s) VALUES (%s)", "users", implode(", ", array_keys($new_user)), ":" . implode(", :", array_keys($new_user)));
-                $statement = $connection->prepare($sql);
-                $statement->execute($new_user);
+                $statement = save_user($new_user);
             } catch (PDOException $e) {
-                echo $sql . "<br>" . $e->getMessage();
+                echo $e->getMessage();
             }
         }
 
