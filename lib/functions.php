@@ -93,6 +93,19 @@ function update_user($data) {
     return $statement;
 }
 
+// delete a user record from the database
+function delete_user($id) {
+    global $connection;
+    require_once "../src/DBconnect.php";
+
+    $query = "DELETE FROM users WHERE id = :id";
+    $statement = $connection->prepare($query);
+    $statement->bindParam(":id", $id);
+    $statement->execute();
+
+    return $statement;
+}
+
 // sanitise user input
 function escape($data) {
     $data = htmlspecialchars($data, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");

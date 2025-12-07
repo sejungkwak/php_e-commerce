@@ -62,14 +62,10 @@
 
     // delete account
     if (isset($_POST['delete'])) {
-
         try {
-            $sql = "DELETE FROM users WHERE id = :id";
+            delete_user($user_id);
 
-            $statement = $connection->prepare($sql);
-            $statement->bindParam(":id", $user_id);
-            $statement->execute();
-
+            // destroy sessions and redirect the user to the home page
             header("Location: logout.php");
             exit;
         } catch (PDOException $e) {
