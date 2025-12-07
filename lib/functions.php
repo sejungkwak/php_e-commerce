@@ -36,6 +36,22 @@ function get_earring($id) {
     return $result;
 }
 
+// subtract the stock of an item in the database
+function subtract_stock($id, $quantity) {
+    global $connection;
+    require_once "../src/DBconnect.php";
+
+    $query = "UPDATE products 
+              SET stock = stock - :quantity 
+              WHERE id = :id";
+    $statement = $connection->prepare($query);
+    $statement->bindValue(":quantity", $quantity, PDO::PARAM_INT);
+    $statement->bindValue(":id", $id, PDO::PARAM_INT);
+    $statement->execute();
+
+    return $statement;
+}
+
 // create a new user record in the database.
 function save_user($data) {
     global $connection;

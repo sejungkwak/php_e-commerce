@@ -37,19 +37,7 @@
 
                 // subtract stocks for each item
                 foreach ($_SESSION['cart'] as $id => $quantity) {
-
-                    $earring = [
-                        "id" => $id,
-                        "stock" => $quantity
-                    ];
-
-                    $sql = "UPDATE products
-                        SET stock = stock - :quantity
-                        WHERE id = :id";
-                    $statement = $connection->prepare($sql);
-                    $statement->bindValue(":quantity", $quantity, PDO::PARAM_INT);
-                    $statement->bindValue(":id", $id, PDO::PARAM_INT);
-                    $statement->execute();
+                    subtract_stock($id, $quantity);
                 }
 
                 // update the corresponding user's delivery information in the database.
