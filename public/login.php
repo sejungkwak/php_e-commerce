@@ -19,7 +19,7 @@
                 var_dump(gettype($row)); die;
             } elseif (empty($password)) {
                 $password_error = "Password is required.";
-            } elseif ($email && $password == $row['password']) {
+            } elseif ($email && $row && $password == $row['password']) {
                 $_SESSION['email'] = $email;
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['active'] = true;
