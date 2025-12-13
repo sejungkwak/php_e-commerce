@@ -71,7 +71,7 @@
                     <div class="card text-center mb-2">
                         <div class="card-body">
                             <a href="earring_details.php?id=<?php echo $earring['id']?>" class="text-decoration-none text-dark">
-                                <img class="card-img-top" src="<?php echo $earring['image']; ?>">
+                                <img class="card-img-top" src="<?php echo $earring['image']; ?>" alt="A pair of earrings">
                             </a>
                             <h2 class="card-title">
                                 <a href="earring_details.php?id=<?php echo $earring['id']?>" class="text-decoration-none text-dark">

@@ -90,7 +90,7 @@
                             <tr>
                                 <td>
                                     <div class='row'>
-                                        <img src='{$earring['image']}' class='col-4'>
+                                        <img src='{$earring['image']}' class='col-4' alt='A pair of earrings'>
                                         <p class='col-8'>{$earring['name']}</p>
                                     </div>
                                 </td>

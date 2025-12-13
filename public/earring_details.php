@@ -89,7 +89,7 @@
         <section class="row p-5">
             <?php echo $success_message ?>
             <div class="col-12 col-md-6">
-                <img src="<?php echo $earring['image'] ?>" class="w-100">
+                <img src="<?php echo $earring['image'] ?>" class="w-100" alt="A pair of earrings">
             </div>
             <div class="col-12 col-md-6">
                 <h1><?php echo $earring_name ?></h1>
