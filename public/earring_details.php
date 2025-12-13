@@ -7,9 +7,7 @@
     $earring_name = $earring['name'];
     $success_message = "";
 
-    $user_id = $_SESSION['user_id'];
-
-    if ($_SESSION["active"] == true) {
+    if ($_SESSION && $_SESSION["active"] == true) {
 
         if (isset($_POST['submit'])) {
 
@@ -17,7 +15,7 @@
                 $_SESSION["cart"] = array();
             }
 
-            if ($_SESSION["cart"][$earring['id']]) {
+            if (isset($_SESSION["cart"][$earring['id']])) {
                 $_SESSION["cart"][$earring['id']]++;
             } else {
                 $_SESSION["cart"][$earring['id']] = 1;
@@ -58,13 +56,13 @@
                 </li>
 
                 <?php
-                if ($_SESSION["active"] == true) {
+                if ($_SESSION && $_SESSION["active"] == true) {
                     echo "
                         <li class=\"nav-item\">
                             <a class=\"nav-link\" href=\"cart.php\">Cart</a>
                         </li>
                         <li class=\"nav-item\">
-                            <a class=\"nav-link\" href=\"profile.php?id=$user_id\">Profile</a>
+                            <a class=\"nav-link\" href=\"profile.php?id={$_SESSION['user_id']}\">Profile</a>
                         </li>
                         <li class=\"nav-item\">
                             <form action='logout.php' method='post'>

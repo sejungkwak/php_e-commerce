@@ -1,8 +1,6 @@
 <?php
     require "../lib/functions.php";
     require_once "../templates/header.php";
-
-    $user_id = $_SESSION['user_id'];
 ?>
 
     <title>Starry Earrings | Home</title>
@@ -22,13 +20,13 @@
                 </li>
 
                     <?php
-                    if ($_SESSION["active"] == true) {
+                    if ($_SESSION && $_SESSION["active"] == true) {
                         echo "
                             <li class=\"nav-item\">
                                 <a class=\"nav-link\" href=\"cart.php\">Cart</a>
                             </li>
                             <li class=\"nav-item\">
-                                <a class=\"nav-link\" href=\"profile.php?id=$user_id\">Profile</a>
+                                <a class=\"nav-link\" href=\"profile.php?id={$_SESSION['user_id']}\">Profile</a>
                             </li>
                             <li class=\"nav-item\">
                                 <form action='logout.php' method='post'>

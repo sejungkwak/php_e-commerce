@@ -2,12 +2,13 @@
     global $connection;
     require_once "../templates/header.php";
 
+    $email_error = $password_error = $login_error = "";
+
     if (isset($_POST['submit'])) {
         try {
             require "../lib/functions.php";
             require_once "../src/DBconnect.php";
 
-            $email_error = $password_error = $login_error = "";
             $email = escape($_POST['email']);
             $password = escape($_POST['password']);
 
@@ -15,6 +16,7 @@
 
             if (empty($email)) {
                 $email_error = "Email is required.";
+                var_dump(gettype($row)); die;
             } elseif (empty($password)) {
                 $password_error = "Password is required.";
             } elseif ($email && $password == $row['password']) {

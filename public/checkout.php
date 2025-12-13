@@ -12,10 +12,10 @@
 
     $user_id = $_SESSION['user_id'];
     $user = get_user($user_id);
+    $name_error = $address_error = $phone_error = "";
 
     if (isset($_POST['submit'])) {
 
-        $name_error = $address_error = $phone_error = "";
         $name = escape($_POST['name']);
         $address = escape($_POST['address']);
         $phone = escape($_POST['phone']);

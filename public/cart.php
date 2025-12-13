@@ -9,7 +9,6 @@
     }
 
     $quantity_error = array();
-    $user_id = $_SESSION['user_id'];
 
     if (isset($_POST['update'])) {
         $product_id = key($_POST['update']);
@@ -47,7 +46,7 @@
                     <a class="nav-link active" href="cart.php">Cart</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="profile.php?id=<?php echo $user_id; ?>">Profile</a>
+                    <a class="nav-link" href="profile.php?id=<?php echo $_SESSION['user_id']; ?>">Profile</a>
                 </li>
                 <li class="nav-item">
                     <form action='logout.php' method='post'>
@@ -102,7 +101,7 @@
                                         <button type='submit' name='update[$id]' class='btn btn-outline-primary'>Update</button>
                                     </div>
                                     <p class='text-end'>($stock in stock)</p>
-                                    <p class='text-danger'>{$quantity_error['$id']}</p>
+                                    <p class='text-danger'>" . (isset($quantity_error[$id]) ? "$quantity_error[$id]" : '') . "</p>
                                 </td>
                                 <td class='text-end'>€$subtotal</td>
                             </tr>

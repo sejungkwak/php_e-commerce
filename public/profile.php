@@ -12,9 +12,9 @@
 
     $user_id = $_SESSION['user_id'];
     $success_message = "";
+    $email_error = $password_error = $name_error = $address_error = $phone_error = "";
 
     if (isset($_POST['update'])) {
-        $email_error = $password_error = $name_error = $address_error = $phone_error = "";
         $email = escape($_POST["email"]);
         $password = escape($_POST["password"]);
         $name = escape($_POST["name"]);
