@@ -17,7 +17,7 @@
 
 -- Dumping database structure for starryearings
 DROP DATABASE IF EXISTS `starryearings`;
-CREATE DATABASE IF NOT EXISTS `starryearings` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `starryearings` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `starryearings`;
 
 -- Dumping structure for table starryearings.products
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `stock` int NOT NULL DEFAULT '0',
   `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table starryearings.products: ~37 rows (approximately)
 INSERT INTO `products` (`id`, `name`, `category`, `price`, `description`, `stock`, `image`) VALUES
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table starryearings.users: ~0 rows (approximately)
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `address`, `phone`, `created_at`) VALUES
