@@ -5,10 +5,10 @@
     require_once "../templates/header.php";
 
     $success_message = "";
+    $email_error = $password_error = $password_confirm_error = "";
 
     if (isset($_POST['submit'])) {
 
-        $email_error = $password_error = $password_confirm_error = "";
         $email = escape($_POST['email']);
         $password = escape($_POST['password']);
         $password_confirm = escape($_POST['password_confirm']);
@@ -37,7 +37,7 @@
             }
         }
 
-        if (isset($_POST['submit']) && $statement) {
+        if (isset($_POST['submit']) && isset($statement)) {
             $success_message = "
                 <div class='card border-success mb-3'>
                     <h2 class='card-header'>Success</h2>
